@@ -52,9 +52,7 @@ const Important = ({ isSidebarOpen }) => {
     task.status === true && task.userId === localStorage.getItem('userId')&&task.important === true
   ),[localStorage.getItem('userId')]);
   return (
-    <div className={`grow p-6 bg-white shadow transition-all duration-300 dark:bg-gray-800 dark:text-white ${
-      isSidebarOpen ? 'ml-[260px]' : 'ml-0'
-    }`}>
+    <div className={`grow p-6 bg-white shadow transition-all duration-300 dark:bg-gray-800 dark:text-white`}>
        <h2 className="text-gray-700 dark:text-white">Important Tasks</h2>
       <div className="p-4 bg-green-50 rounded-md flex h-56 flex-col justify-items-start">
         <input 

@@ -46,10 +46,8 @@ const TodoApp = ({ isSidebarOpen }) => {
     task.status === true && task.userId === localStorage.getItem('userId')
   ),[localStorage.getItem('userId')]);
   return (
-    <div className="grow bg-white dark:text-white dark:bg-gray-800">
-      <div className={`grow p-6 bg-white shadow transition-all duration-300 dark:bg-gray-800 ${
-        isSidebarOpen ? 'ml-[260px]' : 'ml-0'
-      }`}>
+    <div className="grow bg-white dark:text-white dark:bg-gray-800 overflow-y-auto">
+      <div className={`grow p-6 bg-white shadow transition-all duration-300 dark:bg-gray-800`}>
         <h2 className="text-gray-700 dark:text-white">To Do</h2>
         <div className="p-4 bg-green-50 rounded-md flex h-56 flex-col justify-items-start">
           <input 

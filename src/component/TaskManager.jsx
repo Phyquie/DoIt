@@ -36,8 +36,8 @@ const TaskManager = ({ isOpen }) => {
 
   return (
     <div className={`w-[260px] bg-green-50 h-screen p-4 flex flex-col items-center transition-all duration-500 ${
-      isOpen ? 'translate-x-0' : '-translate-x-full'
-    } fixed left-0 z-10 bg-white dark:bg-gray-800`}>
+      isOpen ? 'hidden' : ''
+    } fixed md:static left-0 z-10 bg-white dark:bg-gray-800`}>
       {/* Profile Section */}
       <img
         src={userProfilePicture}
@@ -49,9 +49,6 @@ const TaskManager = ({ isOpen }) => {
       {/* Menu */}
       <nav className="w-full mt-4">
         <ul className="space-y-2">
-          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black cursor-pointer dark:text-white" onClick={() => navigate('/')}>
-            <Home size={20} /> All Tasks
-          </li>
           <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black cursor-pointer dark:text-white" onClick={() => navigate('/')}>
             <Home size={20} /> Today
           </li>

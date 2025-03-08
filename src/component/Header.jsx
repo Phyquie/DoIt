@@ -51,9 +51,9 @@ const Header = ({ toggleSidebar }) => {
 
 
   return (
-    <header className="w-full flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-700">
+    <header className="w-full flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-700 sticky top-0">
       {/* Left Section - Logo and Menu */}
-      <div className="flex items-center gap-2">
+      <div className="md:flex items-center gap-2 hidden">
         <Menu 
           size={24} 
           className="text-green-700 dark:text-green-500 cursor-pointer" 
@@ -63,6 +63,7 @@ const Header = ({ toggleSidebar }) => {
           <span className="text-2xl">&</span> DoIt
         </h1>
       </div>
+      <div></div>
 
       {/* Right Section - Icons */}
       <div className="flex items-center gap-4">
