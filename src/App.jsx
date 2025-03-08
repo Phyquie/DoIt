@@ -6,6 +6,7 @@ import RightSidebar from './component/RightSidebar'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import Login from './component/Login'
 import { Toaster } from 'react-hot-toast'
+import Important from './component/Important'
 
 
 function App() {
@@ -56,8 +57,26 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route 
+        path="/important" 
+        element={
+          <ProtectedRoute>
+            <div className='w-full h-screen overflow-hidden bg-gray-100 flex flex-col'>
+              <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+              <div className='flex w-full h-full overflow-hidden'>
+                <TaskManager isOpen={isSidebarOpen} />
+                <Important isSidebarOpen={isSidebarOpen} />
+                <RightSidebar 
+                  task={task} 
+                  onClose={() => setTask(null)} 
+                  onDelete={() => setTask(null)} 
+                />
+              </div>
+            </div>
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login" element={<Login />} />
-
     </Routes>
     </>
   );

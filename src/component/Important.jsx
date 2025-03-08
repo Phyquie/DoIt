@@ -4,9 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTask,updateTask ,deleteTask} from "../redux/taskSlice";
 import toast from "react-hot-toast";
 
-const TodoApp = ({ isSidebarOpen }) => {
+const Important = ({ isSidebarOpen }) => {
   const [newTaskText, setNewTaskText] = useState("");
-  const tasks = useSelector((state) => state.tasks.tasks.filter((task) => task.userId === localStorage.getItem('userId') && task.status === false),[localStorage.getItem('userId')]);
+  const tasks = useSelector((state) => 
+    state.tasks.tasks.filter((task) => 
+      task.userId === localStorage.getItem('userId') && 
+      task.important === true && 
+      task.status === false
+    )
+  );
   const dispatch = useDispatch();
 
   const handleAddTask = () => {
@@ -19,8 +25,8 @@ const TodoApp = ({ isSidebarOpen }) => {
         status : false,
         date : new Date().toISOString(),
       }));
-      setNewTaskText("");
       toast.success("Task added successfully");
+      setNewTaskText("");
     }
   };
   const handleDeleteTask = (id) => {
@@ -43,13 +49,13 @@ const TodoApp = ({ isSidebarOpen }) => {
   };
   
   const completedTasks = useSelector((state) => state.tasks.tasks.filter((task) => 
-    task.status === true && task.userId === localStorage.getItem('userId')
+    task.status === true && task.userId === localStorage.getItem('userId')&&task.important === true
   ),[localStorage.getItem('userId')]);
   return (
     <div className={`grow p-6 bg-white shadow transition-all duration-300 ${
       isSidebarOpen ? 'ml-[260px]' : 'ml-0'
     }`}>
-      <h2 className="text-gray-700">To Do</h2>
+       <h2 className="text-gray-700">Important Tasks</h2>
       <div className="p-4 bg-green-50 rounded-md flex h-56 flex-col justify-items-start">
         <input 
           type="text" 
@@ -98,4 +104,4 @@ const TodoApp = ({ isSidebarOpen }) => {
   );
 };
 
-export default TodoApp;
+export default Important;

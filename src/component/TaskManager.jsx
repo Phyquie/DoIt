@@ -2,6 +2,7 @@ import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import { Home, Star, Map, UserPlus, Plus, Info } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,6 +11,7 @@ const userEmail = window.localStorage.getItem('userEmail');
 const userProfilePicture = window.localStorage.getItem('userProfilePicture');
 
 const TaskManager = ({ isOpen }) => {
+  const navigate = useNavigate();
   const pendingTasks = useSelector(
     (state) => state.tasks.tasks.filter(
       (task) => task.userId === localStorage.getItem('userId') && task.status === false
@@ -41,13 +43,13 @@ const TaskManager = ({ isOpen }) => {
       {/* Menu */}
       <nav className="w-full mt-4">
         <ul className="space-y-2">
-          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black">
+          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black cursor-pointer" onClick={() => navigate('/')}>
             <Home size={20} /> All Tasks
           </li>
-          <li className="flex items-center gap-2 p-2 bg-green-100 rounded text-black">
-            <Home size={20} className="text-green-700" /> Today
+          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black cursor-pointer" onClick={() => navigate('/')}>
+            <Home size={20} /> Today
           </li>
-          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black ">
+          <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black cursor-pointer" onClick={() => navigate('/important')}>
             <Star size={20} /> Important
           </li>
           <li className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded text-black">
