@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useState ,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../redux/darkSlice';
+import { toggleView } from '../redux/viewSlice';
 
 
 
@@ -13,6 +14,7 @@ import { toggleDarkMode } from '../redux/darkSlice';
 const Header = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const isDarkMode = useSelector((state) => state.isDarkMode.isDarkMode);
+  const isListView = useSelector((state) => state.view.isListView);
   const dispatch = useDispatch();
 
   const handleDarkMode = () => {
@@ -49,6 +51,9 @@ const Header = ({ toggleSidebar }) => {
     navigate("/login");
   };
 
+  const handleViewToggle = () => {
+    dispatch(toggleView());
+  };
 
   return (
     <header className="w-full flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-700 sticky top-0">
@@ -68,8 +73,11 @@ const Header = ({ toggleSidebar }) => {
       {/* Right Section - Icons */}
       <div className="flex items-center gap-4">
         <LogOut size={20} className="cursor-pointer dark:text-gray-200" onClick={handleLogout} />
-        <Search size={20} className="cursor-pointer dark:text-gray-200" />
-        <Grid size={20} className="cursor-pointer dark:text-gray-200" />
+        <Grid 
+          size={20} 
+          className={`cursor-pointer dark:text-gray-200 ${!isListView ? 'text-green-600 dark:text-green-500' : ''}`} 
+          onClick={handleViewToggle}
+        />
         {isDarkMode ? (
           <Moon 
             size={20} 

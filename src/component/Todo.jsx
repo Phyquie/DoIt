@@ -8,6 +8,7 @@ const TodoApp = ({ isSidebarOpen }) => {
   const [newTaskText, setNewTaskText] = useState("");
   const tasks = useSelector((state) => state.tasks.tasks.filter((task) => task.userId === localStorage.getItem('userId') && task.status === false),[localStorage.getItem('userId')]);
   const dispatch = useDispatch();
+  const isListView = useSelector((state) => state.view.isListView);
 
   const handleAddTask = () => {
     if (newTaskText.trim()) {
@@ -66,17 +67,34 @@ const TodoApp = ({ isSidebarOpen }) => {
             </button>
           </div>
         </div>
-        <ul className="mt-4">
+        <ul className={`mt-4 ${!isListView ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4' : ''}`}>
           {tasks.map((task) => (
-            <li key={task.id} className="flex justify-between items-center py-2 border-b">
-              <div className="flex items-center gap-2">
-                <input type="checkbox" className="cursor-pointer"  onChange={() => handleCompleteTask(task.id)} />
-                <span>{task.text}</span>
+            <li 
+              key={task.id} 
+              className={`
+                ${isListView 
+                  ? 'flex justify-between items-center py-2 border-b' 
+                  : 'p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-gray-700 min-h-[120px] flex flex-col justify-between'
+                }
+              `}
+            >
+              <div className={`flex items-center gap-2 ${!isListView ? 'mb-4' : ''}`}>
+                <input 
+                  type="checkbox" 
+                  className="cursor-pointer" 
+                  onChange={() => handleCompleteTask(task.id)} 
+                />
+                <span className={`${!isListView ? 'text-lg font-medium' : ''}`}>{task.text}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Trash2 className="cursor-pointer" onClick={() => handleDeleteTask(task.id)} />
-                <Star className={`cursor-pointer ${task.important ? "fill-black" : "text-gray-500"}`} onClick={() => 
-                  task.important ? handleUnimportantTask(task.id) : handleImportantTask(task.id)} />
+                <Trash2 
+                  className="cursor-pointer" 
+                  onClick={() => handleDeleteTask(task.id)} 
+                />
+                <Star 
+                  className={`cursor-pointer ${task.important ? "fill-black dark:fill-white" : "text-gray-500"}`} 
+                  onClick={() => task.important ? handleUnimportantTask(task.id) : handleImportantTask(task.id)} 
+                />
               </div>
             </li>
           ))}
