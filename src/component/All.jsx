@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTask,updateTask ,deleteTask} from "../redux/taskSlice";
 import toast from "react-hot-toast";
 
-const Important = ({ isSidebarOpen }) => {
+const All = ({ isSidebarOpen }) => {
   const [newTaskText, setNewTaskText] = useState("");
   const isGridView = useSelector((state) => state.isDarkMode.isGridView);
   const tasks = useSelector((state) => 
     state.tasks.tasks.filter((task) => 
       task.userId === localStorage.getItem('userId') && 
-      task.important === true && 
       task.status === false
     )
   );
@@ -50,12 +49,13 @@ const Important = ({ isSidebarOpen }) => {
   };
   
   const completedTasks = useSelector((state) => state.tasks.tasks.filter((task) => 
-    task.status === true && task.userId === localStorage.getItem('userId')&&task.important === true
+    task.status === true && task.userId === localStorage.getItem('userId')
   ),[localStorage.getItem('userId')]);
   return (
-    <div className="grow bg-white dark:text-white dark:bg-gray-800">
-      <div className={`grow p-6 bg-white shadow transition-transform duration-300 dark:bg-gray-800`}>
-       <h2 className="text-gray-700 dark:text-white">Important Tasks</h2>
+    <div className={`grow p-6 bg-white shadow transition-all duration-300 dark:bg-gray-800 dark:text-white ${
+      isSidebarOpen ? 'md:ml-[260px]' : 'ml-0'
+    }`}>
+       <h2 className="text-gray-700 dark:text-white">All Tasks</h2>
       <div className="p-4 bg-green-50 rounded-md flex h-56 flex-col justify-items-start">
         <input 
           type="text" 
@@ -107,8 +107,7 @@ const Important = ({ isSidebarOpen }) => {
         ))}
       </ul>
     </div>
-    </div>
   );
 };
 
-export default Important;
+export default All;

@@ -8,6 +8,7 @@ import Login from './component/Login'
 import { Toaster } from 'react-hot-toast'
 import Important from './component/Important'
 import { useSelector } from 'react-redux'
+import All from './component/All'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -58,9 +59,12 @@ function App() {
               <Header 
                 toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
               />
-              <div className='flex w-full h-full overflow-hidden'>
+              <div className='flex w-full h-full overflow-hidden grow'>
                 <TaskManager isOpen={isSidebarOpen} />
-                <TodoApp isSidebarOpen={isSidebarOpen} />
+                <div className='grow'>
+                <TodoApp isSidebarOpen={isSidebarOpen}  />
+                </div>
+                
                 <RightSidebar 
                   task={task} 
                   onClose={() => setTask(null)} 
@@ -80,8 +84,10 @@ function App() {
                 toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
               />
               <div className='flex w-full h-full overflow-hidden'>
-                <TaskManager isOpen={isSidebarOpen} />
+                <TaskManager isOpen={isSidebarOpen}  />
+                <div className='grow'>
                 <Important isSidebarOpen={isSidebarOpen} />
+                </div>
                 <RightSidebar 
                   task={task} 
                   onClose={() => setTask(null)} 
@@ -92,6 +98,30 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route 
+        path="/all" 
+        element={
+          <ProtectedRoute>
+            <div className='w-full h-screen overflow-hidden bg-gray-100 flex flex-col dark:bg-gray-900'>
+              <Header 
+                toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+              />
+              <div className='flex w-full h-full overflow-hidden'>
+                <TaskManager isOpen={isSidebarOpen} />
+                <div className='grow'>
+                <All isSidebarOpen={isSidebarOpen} />
+                </div>
+                <RightSidebar 
+                  task={task} 
+                  onClose={() => setTask(null)} 
+                  onDelete={() => setTask(null)} 
+                />
+              </div>
+            </div>
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="/login" element={<Login className="dark:bg-gray-900 " />} />
     </Routes>
     </>
