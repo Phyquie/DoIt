@@ -7,7 +7,7 @@ export default function RightSidebar({ task, onClose, onDelete }) {
   if (!task) return null;
 
   return (
-    <div className="w-full max-w-md bg-green-50 p-4 border-l shadow-lg h-screen flex flex-col">
+    <div className="w-full max-w-md bg-green-50 p-4 border-l shadow-lg h-screen flex flex-col bg-white dark:bg-gray-800 dark:text-white">
       <div className="flex justify-between items-center border-b pb-2">
         <h2 className="text-lg font-semibold">{task?.title}</h2>
         <button onClick={onClose} className="text-gray-500 hover:text-black">

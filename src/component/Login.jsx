@@ -27,6 +27,7 @@ const Login = () => {
         window.localStorage.setItem('userName', user.name);
         window.localStorage.setItem('userEmail', user.email);
         window.localStorage.setItem('userProfilePicture', user.profilePicture);
+        
 
         toast.success("Login successful");
         navigate("/");
@@ -42,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-green-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white flex flex-col items-center justify-center">
        <div className=" text-green-700 text-4xl font-bold my-4">DoIt</div> 
       <div className="w-96 bg-white p-6 shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
@@ -68,11 +69,12 @@ const Login = () => {
             <Lock className="absolute left-3 top-3 text-gray-500" />
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full pl-10 pr-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full pl-10 pr-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:text-black"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              
             />
             {/* Toggle Password Visibility */}
             {showPassword ? (
